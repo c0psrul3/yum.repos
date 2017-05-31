@@ -1,0 +1,25 @@
+#
+# PostgreSQL RPM Building Project - Repository Packages
+# =====================================================
+# see entire listing of available PostgreSQL repo's:
+# [https://yum.postgresql.org/repopackages.php]
+#
+# This Yum Repo config file was retrieved from:
+#   [https://download.postgresql.org/pub/repos/yum/9.5/redhat/rhel-6-x86_64/pgdg-redhat95-9.5-3.noarch.rpm]
+#
+[pgdg95]
+name=PostgreSQL 9.5 $releasever - $basearch
+baseurl=https://download.postgresql.org/pub/repos/yum/9.5/redhat/rhel-$releasever-$basearch
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG-95
+
+[pgdg95-source]
+name=PostgreSQL 9.5 $releasever - $basearch - Source
+failovermethod=priority
+baseurl=https://download.postgresql.org/pub/repos/yum/srpms/9.5/redhat/rhel-$releasever-$basearch
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-PGDG-95
+
+

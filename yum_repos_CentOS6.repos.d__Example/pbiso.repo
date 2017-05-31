@@ -1,0 +1,8 @@
+
+[pbiso]
+gpgcheck=1
+gpgkey=http://repo.pbis.beyondtrust.com/yum/RPM-GPG-KEY-pbis
+enabled=1
+name=PBISO- local packages for $basearch
+baseurl=http://repo.pbis.beyondtrust.com/yum/pbiso/$basearch
+
