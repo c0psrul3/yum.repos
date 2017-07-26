@@ -1,0 +1,95 @@
+##
+## [[https://wiki.centos.org/TipsAndTricks/CentOSUpgradeTool]]
+##
+
+
+
+#---
+#
+# This YUM Repo can be used to upgrade CentOS-6.5 to 7.x
+#
+#[[http://www.shaunfreeman.name/upgrading-centos-6-5-to-centos-7-2/]]
+#
+
+## =============================
+## Step 2: Add the prerequisites
+## =============================
+
+```
+[upg]
+name=CentOS-$releasever - Upgrade Tool
+baseurl=http://dev.centos.org/centos/6/upg/x86_64/
+gpgcheck=1
+enabled=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-6
+```
+
+# Once done save this file. First we are going to install the pre-upgrade tool
+# and run it to show us any potential problems, so in your terminal
+
+# NOTE: 
+# - Before doing this we have to install package 'openscap-1.0.8-1.0.1'
+ 
+```
+sudo yum install http://dev.centos.org/centos/6/upg/x86_64/Packages/openscap-1.0.8-1.0.1.el6.centos.x86_64.rpm
+sudo yum install preupgrade-assistant-contents redhat-upgrade-tool preupgrade-assistant
+```
+
+## =============================
+## Step 3: Verifying the upgrade
+## =============================
+```
+sudo preupg
+```
+
+```
+sudo rpm --import http://mirror.centos.org/centos/RPM-GPG-KEY-CentOS-7
+```
+
+
+## =============================
+## Step 4: Starting the upgrade
+## =============================
+```
+sudo /usr/bin/redhat-upgrade-tool-cli --force --network 7 --instrepo=http://mirror.centos.org/centos/7/os/x86_64
+```
+
+
+## =============================
+## Step 5: Reboot the server
+## =============================
+```
+sudo reboot
+```
+
+
+## =============================
+## Step 6: Check for post upgrade problems
+## =============================
+```
+sudo cat /etc/centos-release
+```
+
+#
+# you should see:
+#
+#"""
+#  CentOS Linux release 7.2.1511 (Core)
+#"""
+
+# Run a update
+```
+sudo yum update
+```
+
+# if you get errors saying  ‘libpcre.so.0 is missing’ then try reinstalling pcre.
+```
+yum reinstall pcre
+```
+
+# and if that didn’t work then try symlinking the newer pcre file to the old one with
+```
+ln -s /lib64/libpcre.so.1 /lib64/libpcre.so.0
+```
+
+
